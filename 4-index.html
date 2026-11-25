@@ -1,0 +1,1751 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>خدمة خامسة وسادسة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f3f5;
+      --surface: #ffffff;
+      --ink: #1b2233;
+      --muted: #5f6878;
+      --line: #dde0e6;
+      --accent: #0f6b63;
+      --accent-ink: #ffffff;
+      --danger: #b3261e;
+      --ok: #1a7f4b;
+      --gold: #b8860b;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #12151c;
+        --surface: #1b1f29;
+        --ink: #eceef3;
+        --muted: #9aa2b1;
+        --line: #2c3240;
+        --accent: #4fc3b5;
+        --accent-ink: #0c1512;
+        --danger: #f2837c;
+        --ok: #4cc38a;
+        --gold: #e0b341;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #12151c;
+      --surface: #1b1f29;
+      --ink: #eceef3;
+      --muted: #9aa2b1;
+      --line: #2c3240;
+      --accent: #4fc3b5;
+      --accent-ink: #0c1512;
+      --danger: #f2837c;
+      --ok: #4cc38a;
+      --gold: #e0b341;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Cairo", "Segoe UI", Tahoma, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    .head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 8px 0 2px;
+    }
+
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 10px;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+
+    .status {
+      font-size: .88rem;
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tile {
+      --c: var(--muted);
+      font: inherit;
+      color: inherit;
+      text-align: right;
+      cursor: pointer;
+      background: var(--surface);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tile .band {
+      height: 10px;
+      background: linear-gradient(90deg, var(--c), color-mix(in srgb, var(--c) 55%, white), var(--c));
+    }
+
+    .tile .body {
+      padding: 8px 12px 10px;
+    }
+
+    .tile .count {
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .tile .name {
+      font-weight: 600;
+    }
+
+    .tile[aria-pressed="true"] {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    input[type=text],
+    input[type=search],
+    input[type=tel],
+    input[type=password],
+    input[type=date],
+    select,
+    textarea {
+      font: inherit;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 9px 12px;
+      min-width: 0;
+    }
+
+    input[type=search] {
+      flex: 1 1 200px;
+    }
+
+    input[type=password] {
+      flex: 1 1 160px;
+      direction: ltr;
+    }
+
+    input[type=tel] {
+      direction: ltr;
+      text-align: right;
+    }
+
+    button.btn,
+    a.btn {
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 8px 14px;
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
+    }
+
+    button.danger {
+      color: var(--danger);
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: default;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .addgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+    }
+
+    .addgrid .full {
+      grid-column: 1 / -1;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .row {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      border-inline-start: 6px solid var(--line);
+    }
+
+    .row.late {
+      border-inline-start-color: var(--danger);
+    }
+
+    .row.ok {
+      border-inline-start-color: var(--ok);
+    }
+
+    .row.todo {
+      border-inline-start-color: var(--gold);
+    }
+
+    .todo-text {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .row .who {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .row .who strong {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .row .who span {
+      display: block;
+      font-size: .88rem;
+    }
+
+    .late-text {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .ok-text {
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    .chip {
+      font-size: .8rem;
+      padding: 2px 9px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .chip.bday {
+      border-color: var(--gold);
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 12px;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .banner {
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border: 1.5px solid var(--line);
+      background: var(--surface);
+    }
+
+    .banner.bday {
+      border-color: var(--gold);
+      background: color-mix(in srgb, var(--gold) 12%, var(--surface));
+    }
+
+    .banner.late {
+      border-color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 9%, var(--surface));
+    }
+
+    .banner .bar {
+      margin: 6px 0 0;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: calc(env(safe-area-inset-top, 0px) + 16px) 12px calc(env(safe-area-inset-bottom, 0px) + 16px);
+      overflow: auto;
+      z-index: 20;
+    }
+
+    .sheet {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 580px;
+      padding: 16px;
+    }
+
+    .sheet .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sheet .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .sheet .fields .full {
+      grid-column: 1 / -1;
+    }
+
+    .sheet label.f {
+      display: flex;
+      flex-direction: column;
+      font-size: .82rem;
+      color: var(--muted);
+      gap: 2px;
+    }
+
+    .hist {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 240px;
+      overflow: auto;
+      margin-top: 6px;
+    }
+
+    .hist .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid var(--line);
+      padding: 4px 0;
+      font-size: .92rem;
+    }
+
+    .hist .item button {
+      padding: 2px 8px;
+    }
+
+    #scanVid {
+      width: 100%;
+      border-radius: 12px;
+      background: #000;
+      max-height: 60vh;
+    }
+
+    .qrimg {
+      display: block;
+      margin: 10px auto;
+      width: 240px;
+      max-width: 100%;
+      background: #fff;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .av {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex: none;
+      background: var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .av.big {
+      width: 84px;
+      height: 84px;
+      font-size: 2.4rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 6;
+      background: var(--bg);
+      padding: 6px 0 8px;
+      margin-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab {
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 8px 14px;
+      flex: none;
+    }
+
+    .tab.on {
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
+    }
+
+    details.panel>summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style-position: inside;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="head">
+      <div>
+        <h1>خدمة خامسة وسادسة</h1>
+        <p class="sub" id="roleLine">دخول الخدام</p>
+      </div>
+      <button class="btn" id="whoBtn" type="button" hidden></button>
+      <button class="btn" id="logoutBtn" type="button" hidden>خروج</button>
+    </div>
+    <p class="status" id="status" role="status"></p>
+
+    <!-- ===== تسجيل الدخول ===== -->
+    <section class="panel" id="loginPanel">
+      <h2>دخول الخدام</h2>
+      <div class="bar">
+        <input type="password" id="pass" placeholder="الباسورد" autocomplete="current-password">
+        <button class="btn" id="showPass" type="button" aria-label="إظهار الباسورد" title="إظهار الباسورد">👁</button>
+        <button class="btn primary" id="loginBtn" type="button">دخول</button>
+      </div>
+      <div class="muted" id="loginMsg" role="status"></div>
+    </section>
+
+    <!-- ===== التطبيق ===== -->
+    <div id="app" hidden>
+      <nav class="tabs" id="tabs" aria-label="الأقسام">
+        <button class="tab on" type="button" data-tab="visit">👥 الافتقاد</button>
+        <button class="tab" type="button" data-tab="att">🗓️ الحضور</button>
+        <button class="tab" type="button" data-tab="ik" id="tabIk" hidden>🤝 إخوة الرب</button>
+        <button class="tab" type="button" data-tab="backup">📥 نسخة احتياطية</button>
+      </nav>
+
+      <section id="tab-visit">
+        <div id="alerts"></div>
+        <div class="tiles" id="tiles" role="group" aria-label="فلتر"></div>
+
+        <details class="panel" id="addBox">
+          <summary>➕ إضافة مخدوم</summary>
+          <div class="addgrid" style="margin-top:10px">
+            <input type="text" id="newName" class="full" placeholder="الاسم" autocomplete="off">
+            <select id="newGender" aria-label="ولد ولا بنت">
+              <option value="boys">ولد</option>
+              <option value="girls">بنت</option>
+            </select>
+            <select id="newGrade" aria-label="السنة">
+              <option value="5">سنة خامسة</option>
+              <option value="6">سنة سادسة</option>
+            </select>
+            <input type="tel" id="newPhone" placeholder="رقم التليفون" autocomplete="off">
+            <input type="tel" id="newPhone2" placeholder="رقم احتياطي" autocomplete="off">
+            <input type="text" id="newFather" placeholder="أب الاعتراف" autocomplete="off">
+            <input type="text" id="newAddress" class="full" placeholder="العنوان" autocomplete="off">
+            <input type="date" id="newBday" aria-label="تاريخ الميلاد" title="تاريخ الميلاد">
+            <button class="btn primary" id="addBtn" type="button">إضافة</button>
+          </div>
+        </details>
+
+        <div class="bar">
+          <input type="search" id="q" placeholder="ابحث بالاسم أو الرقم أو أب الاعتراف أو العنوان" aria-label="بحث">
+          <select id="stSel" aria-label="فلتر الافتقاد">
+            <option value="all">كل المخدومين</option>
+            <option value="todo">محتاجين افتقاد دلوقتي</option>
+            <option value="late">المتأخرين (4 أيام أو أكتر)</option>
+          </select>
+        </div>
+        <div class="muted" id="resultInfo" style="margin-bottom:8px"></div>
+        <div class="list" id="list"></div>
+      </section>
+
+      <section id="tab-att" hidden></section>
+      <section id="tab-ik" hidden></section>
+
+      <section id="tab-backup" hidden>
+        <section class="panel" id="backupRow" style="margin-top:20px" hidden>
+          <h2>📥 نسخة احتياطية</h2>
+          <p class="muted">بتنزّل ملف <b>Excel</b> عادي تفتحه وتقراه: ورقة بكل المخدومين (الاسم والسنة والأرقام وأب
+            الاعتراف والعنوان وعيد الميلاد وآخر افتقاد) وورقة بسجل الافتقاد كله. احفظه في مكان آمن لأن فيه بيانات
+            الأطفال.
+          </p>
+          <div class="bar">
+            <button class="btn primary" id="exportBtn" type="button">تحميل ملف Excel</button>
+            <button class="btn" id="exportCsvBtn" type="button">تحميل CSV (لو الـ Excel ما اشتغلش)</button>
+          </div>
+          <div class="muted" id="backupScope" style="margin-bottom:6px"></div>
+          <div class="muted" id="backupMsg" role="status"></div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="sheet" id="sheet"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    (function () {
+      /* ========= الصق إعدادات Firebase بتاعتك هنا (من Project settings > Your apps) ========= */
+      var FIREBASE_CONFIG = {
+        apiKey: "AIzaSyCx8u30T34JaxUAbY5azBIiSMVMyKm87DE",
+        authDomain: "aftkad-5598f.firebaseapp.com",
+        projectId: "aftkad-5598f",
+        appId: "1:234313299423:web:0db760d7a8fbc88444806a"
+      };
+      /* حسابات مخفية: كل واحد باسورد خاص. لازم تعملهم في Authentication بنفس الإيميلات دي. */
+      var EMAILS = { boys: "boys@aftkad.com", girls: "girls@aftkad.com", all: "admin@aftkad.com" };
+      var ALERT_DAYS = 4; // علامة حمرا لما الافتقاد يتأخر عن ميعاده بالعدد ده من الأيام
+      var CYCLE_MODE = "rolling"; // "rolling" = كل مخدوم بيحتاج افتقاد بعد CYCLE_DAYS يوم من آخر افتقاد ليه | "week" = أسبوع بالتقويم (بيبدأ يوم WEEK_START_DAY)
+      var CYCLE_DAYS = 7; // مدة الدورة في وضع rolling
+      var WEEK_START_DAY = 5; // أول يوم في الأسبوع: 0=الأحد 1=الإثنين ... 5=الجمعة 6=السبت (كل أسبوع جديد الافتقاد بيتصفّر)
+      var BDAY_DAYS = 7;  // أعياد الميلاد اللي تظهر في الصفحة الرئيسية (عدد الأيام الجاية)
+      /* ======================================================================================== */
+
+      var VISIT_TYPES = ["تليفون", "رسالة", "زيارة"];
+      var DISPLAY = { "تليفون": "📞 اتصال", "رسالة": "💬 رسالة", "زيارة": "🏠 زيارة", "افتقاد": "✔ افتقاد" };
+
+      /* ===== helpers-pure-start ===== */
+      function pad(n) { return (n < 10 ? "0" : "") + n; }
+      function isoUTC(d) { return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate()); }
+      function todayStr() { var n = new Date(); return n.getFullYear() + "-" + pad(n.getMonth() + 1) + "-" + pad(n.getDate()); }
+      function daysBetween(a, b) {
+        return Math.round((new Date(b + "T00:00:00Z") - new Date(a + "T00:00:00Z")) / 86400000);
+      }
+      /* بداية الأسبوع حسب WEEK_START_DAY (السبت افتراضياً) */
+      function weekStartOf(t) {
+        var d = new Date(t + "T00:00:00Z");
+        d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() - WEEK_START_DAY + 7) % 7));
+        return isoUTC(d);
+      }
+      function addDays(iso, n) { var d = new Date(iso + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return isoUTC(d); }
+      /* الافتقاد: بعد ما يتسجل المخدوم بيبقى "تمام" لحد ميعاد الافتقاد الجاي، وبعدها بيبقى "محتاج افتقاد".
+         ميعاد الجاي = آخر افتقاد + CYCLE_DAYS (rolling) أو أول الأسبوع اللي بعده (week).
+         العلامة الحمرا = محتاج افتقاد وعدّى على ميعاده ALERT_DAYS يوم أو أكتر. */
+      function statusOf(k, today) {
+        var last = "", types = [];
+        (k.visits || []).forEach(function (v) { if (v.d > last) last = v.d; });
+        (k.visits || []).forEach(function (v) { if (last && v.d === last && types.indexOf(v.t) < 0) types.push(v.t); });
+        var base = last || k.added || today;
+        var days = Math.max(0, daysBetween(base, today));
+        var due = last ? (CYCLE_MODE === "week" ? addDays(weekStartOf(last), 7) : addDays(last, CYCLE_DAYS)) : base;
+        var done = !!last && today < due;
+        var overdue = done ? 0 : Math.max(0, daysBetween(due, today));
+        return { last: last, lastTypes: types, never: !last, days: days, due: due, done: done, weekDone: done, dueIn: done ? daysBetween(today, due) : 0, overdue: overdue, late: !done && overdue >= ALERT_DAYS, todayDone: last === today, todayTypes: last === today ? types : [] };
+      }
+      function isBdayToday(k, today) {
+        return !!k.birthday && k.birthday.slice(5) === today.slice(5);
+      }
+      function daysToBirthday(k, today) {
+        if (!k.birthday) return 999;
+        var p = k.birthday.split("-");
+        if (p.length !== 3) return 999;
+        var t0 = new Date(today + "T00:00:00Z"), y = t0.getUTCFullYear();
+        var n = new Date(Date.UTC(y, +p[1] - 1, +p[2]));
+        if (n < t0) n = new Date(Date.UTC(y + 1, +p[1] - 1, +p[2]));
+        return Math.round((n - t0) / 86400000);
+      }
+      function waLink(num, text) {
+        var d = String(num || "").replace(/\D/g, "");
+        if (!d) return "";
+        if (d.charAt(0) === "0") d = "20" + d.slice(1);
+        return "https://wa.me/" + d + (text ? "?text=" + encodeURIComponent(text) : "");
+      }
+      /* ===== helpers-pure-end ===== */
+
+      var state = { role: "", kidsBy: { boys: [], girls: [] }, vlog: {} };
+      var gFilter = "all", grFilter = "all", stFilter = "all", query = "";
+      var armed = {}, chain = {};
+      var dbRef = null, auth = null, unsubs = [];
+      var openId = null;
+
+      function $(id) { return document.getElementById(id); }
+      var uidN = 0;
+      function uid() { return Date.now().toString(36) + (uidN++).toString(36) + Math.random().toString(36).slice(2, 5); }
+      function norm(s) {
+        return String(s || "").toLowerCase().trim()
+          .replace(/[\u064B-\u0652\u0640]/g, "")
+          .replace(/[أإآ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه");
+      }
+      function h(tag, attrs) {
+        var e = document.createElement(tag);
+        if (attrs) for (var k in attrs) {
+          if (k === "text") e.textContent = attrs[k];
+          else if (k === "class") e.className = attrs[k];
+          else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), attrs[k]);
+          else e.setAttribute(k, attrs[k]);
+        }
+        for (var i = 2; i < arguments.length; i++) if (arguments[i]) e.appendChild(arguments[i]);
+        return e;
+      }
+      function arm(key, btn, idleText, action) {
+        if (armed[key]) { clearTimeout(armed[key]); delete armed[key]; action(); return; }
+        btn.textContent = "متأكد؟";
+        armed[key] = setTimeout(function () { delete armed[key]; btn.textContent = idleText; }, 3000);
+      }
+      function nextNote(s) {
+        if (CYCLE_MODE === "week") return "الأسبوع الجاي";
+        return s.dueIn === 1 ? "بكرة" : "بعد " + s.dueIn + " يوم";
+      }
+      function dateLabel(iso) {
+        try { return new Date(iso + "T00:00:00Z").toLocaleDateString("ar-EG-u-nu-latn", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }); }
+        catch (e) { return iso; }
+      }
+      function gradeLabel(g) { return g === 6 ? "سادسة" : "خامسة"; }
+      function flash(t) { $("status").textContent = t; }
+      function configured() { return !!(window.firebase && FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.apiKey.indexOf("PASTE") !== 0); }
+
+      function canBoys() { return state.role === "boys" || state.role === "all"; }
+      function canGirls() { return state.role === "girls" || state.role === "all"; }
+      function allKids() { return state.kidsBy.boys.concat(state.kidsBy.girls); }
+      function kidById(id) { var a = allKids(); for (var i = 0; i < a.length; i++) if (a[i].id === id) return a[i]; return null; }
+      function roleOfEmail(e) {
+        e = String(e || "").toLowerCase();
+        for (var r in EMAILS) if (EMAILS[r] === e) return r;
+        return "";
+      }
+
+      /* ---------- الحفظ ---------- */
+      function queue(key, fn) {
+        chain[key] = (chain[key] || Promise.resolve()).then(fn).catch(function (e) {
+          if (e && e.code === "permission-denied") flash("مش مسموحلك بالعملية دي. (راجع الـ Rules)");
+          else flash("حصلت مشكلة في الحفظ. جرّب تاني بعد شوية.");
+        });
+      }
+      function ref(k) { return dbRef.collection(k.coll).doc(k.id); }
+      function kidBody(k) {
+        return { name: k.name, phone: k.phone, phone2: k.phone2, father: k.father, address: k.address, grade: k.grade, birthday: k.birthday, added: k.added, greeted: k.greeted };
+      }
+      function persistKid(k) { queue("k" + k.id, function () { return ref(k).set(kidBody(k), { merge: true }); }); }
+      function sameVisit(a, b) { return a.d === b.d && a.t === b.t && (a.n || "") === (b.n || ""); }
+      function addVisit(k, entry) {
+        var isNew = !k.visits.some(function (v) { return sameVisit(v, entry); });
+        if (isNew) k.visits.push(entry);
+        queue("v" + k.id, function () { return ref(k).set({ visits: firebase.firestore.FieldValue.arrayUnion(entry) }, { merge: true }); });
+        if (isNew) logBy(k, entry);
+        render();
+      }
+      function delVisit(k, entry) {
+        k.visits = k.visits.filter(function (v) { return !sameVisit(v, entry); });
+        queue("v" + k.id, function () { return ref(k).set({ visits: firebase.firestore.FieldValue.arrayRemove(entry) }, { merge: true }); });
+        render();
+      }
+
+      function normKid(id, coll, v) {
+        var visits = [];
+        if (Array.isArray(v.visits)) v.visits.forEach(function (x) {
+          if (x && typeof x.d === "string") visits.push({ d: x.d, t: String(x.t || "افتقاد"), n: String(x.n || "") });
+        });
+        return {
+          id: id, coll: coll, gender: coll, name: String(v.name || ""), phone: String(v.phone || ""), phone2: String(v.phone2 || ""),
+          father: String(v.father || ""), address: String(v.address || ""), grade: v.grade === 6 ? 6 : 5, birthday: String(v.birthday || ""),
+          added: String(v.added || ""), visits: visits, greeted: String(v.greeted || ""), photo: String(v.photo || ""),
+          att: Array.isArray(v.att) ? v.att.filter(function (x) { return typeof x === "string"; }) : []
+        };
+      }
+
+      /* ---------- Firebase / تسجيل الدخول ---------- */
+      function stopListeners() { unsubs.forEach(function (u) { try { u(); } catch (e) { } }); unsubs = []; }
+      function startListeners() {
+        stopListeners();
+        ["boys", "girls"].forEach(function (coll) {
+          if ((coll === "boys" && !canBoys()) || (coll === "girls" && !canGirls())) return;
+          unsubs.push(dbRef.collection(coll).onSnapshot(function (s) {
+            state.kidsBy[coll] = s.docs.map(function (d) { return normKid(d.id, coll, d.data() || {}); });
+            render();
+          }, function () { flash("مش قادر أقرأ البيانات. اتأكد من الـ Rules ومن إن الحسابات اتعملت."); }));
+        });
+        /* سجل مين افتقد مين (الاسم واللون): الأدمن بس بيقراه */
+        if (state.role === "all") {
+          unsubs.push(dbRef.collection("visitlog").onSnapshot(function (s) {
+            var m = {};
+            s.docs.forEach(function (d) {
+              var v = d.data() || {};
+              m[d.id] = (Array.isArray(v.log) ? v.log : []).filter(function (x) { return x && typeof x.d === "string" && x.by; })
+                .map(function (x) { return { d: x.d, t: String(x.t || ""), by: String(x.by), c: String(x.c || "#888") }; });
+            });
+            state.vlog = m; render();
+          }, function () { flash("مش قادر أقرأ سجل الخدام. أضف الـ Rule بتاعة visitlog في Firebase."); }));
+        }
+      }
+
+      /* ---------- الأقسام (تابات) ---------- */
+      var activeTab = "visit";
+      function showTab(name) {
+        if (name === "ik" && state.role !== "all") name = "visit";
+        activeTab = name;
+        ["visit", "att", "ik", "backup"].forEach(function (t) { $("tab-" + t).hidden = (t !== name); });
+        Array.prototype.forEach.call(document.querySelectorAll("#tabs .tab"), function (b) {
+          var on = b.getAttribute("data-tab") === name;
+          b.classList.toggle("on", on);
+          b.setAttribute("aria-selected", String(on));
+        });
+        window.scrollTo(0, 0);
+      }
+      Array.prototype.forEach.call(document.querySelectorAll("#tabs .tab"), function (b) {
+        b.addEventListener("click", function () { showTab(b.getAttribute("data-tab")); });
+      });
+
+      function showApp(on) {
+        $("app").hidden = !on;
+        $("tabIk").hidden = state.role !== "all";
+        if (!on || (activeTab === "ik" && state.role !== "all")) showTab("visit");
+        $("loginPanel").hidden = on;
+        $("logoutBtn").hidden = !on;
+        $("roleLine").textContent = !on ? "دخول الخدام" : (state.role === "boys" ? "خدام الولاد" : state.role === "girls" ? "خدام البنات" : "مسؤول الخدمة (الولاد والبنات)");
+        $("backupRow").hidden = !on;
+        $("backupScope").textContent = state.role === "boys" ? "النسخة هتشمل الولاد بس (خامسة وسادسة)."
+          : state.role === "girls" ? "النسخة هتشمل البنات بس (خامسة وسادسة)." : "النسخة هتشمل الولاد والبنات.";
+        var g = $("newGender");
+        g.hidden = state.role !== "all";
+        if (state.role === "boys") g.value = "boys";
+        if (state.role === "girls") g.value = "girls";
+      }
+
+      function initFirebase() {
+        if (!configured()) { flash("Firebase لسه مش متضبط في الملف (FIREBASE_CONFIG)."); return; }
+        try {
+          firebase.initializeApp(FIREBASE_CONFIG);
+          dbRef = firebase.firestore();
+          auth = firebase.auth();
+        } catch (e) { flash("مشكلة في إعدادات Firebase."); return; }
+        auth.onAuthStateChanged(function (user) {
+          if (user) {
+            var r = roleOfEmail(user.email);
+            if (!r) { auth.signOut(); return; }
+            state.role = r;
+            showApp(true);
+            flash("");
+            startListeners();
+            afterLogin();
+          } else {
+            stopListeners();
+            state.role = ""; state.kidsBy = { boys: [], girls: [] }; state.vlog = {};
+            updateWho();
+            closeModal();
+            showApp(false);
+          }
+          render();
+        });
+      }
+
+      async function doLogin() {
+        var msg = $("loginMsg"), pass = $("pass").value;
+        if (!auth) { msg.textContent = "Firebase مش متضبط."; return; }
+        if (!pass) { msg.textContent = "اكتب الباسورد."; return; }
+        msg.textContent = "بيدخل...";
+        var order = ["boys", "girls", "all"], code = "";
+        for (var i = 0; i < order.length; i++) {
+          try {
+            await auth.signInWithEmailAndPassword(EMAILS[order[i]], pass);
+            msg.textContent = ""; $("pass").value = ""; needIdentity = true; return;
+          } catch (e) {
+            code = (e && e.code) || "";
+            if (code === "auth/network-request-failed" || code === "auth/too-many-requests" || code === "auth/unauthorized-domain" || code === "auth/invalid-api-key") break;
+          }
+        }
+        var t = "حصلت مشكلة في الدخول (" + code + ").";
+        if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/invalid-login-credentials" || code === "auth/user-not-found") t = "الباسورد غلط. اتأكد من لغة الكيبورد، أو اضغط 👁 تشوف اللي كتبته.";
+        else if (code === "auth/network-request-failed") t = "مفيش اتصال بـ Firebase. اتأكد من النت أو من إضافات المتصفح.";
+        else if (code === "auth/too-many-requests") t = "محاولات غلط كتير. استنى شوية وجرّب تاني.";
+        else if (code === "auth/unauthorized-domain") t = "الدومين ده مش مضاف في Firebase (Authentication ← Settings ← Authorized domains).";
+        else if (code === "auth/invalid-api-key") t = "الـ apiKey في الكود غلط.";
+        msg.textContent = t;
+      }
+      $("loginBtn").addEventListener("click", doLogin);
+      $("pass").addEventListener("keydown", function (e) { if (e.key === "Enter") doLogin(); });
+      $("showPass").addEventListener("click", function () { var i = $("pass"); i.type = i.type === "password" ? "text" : "password"; });
+      $("logoutBtn").addEventListener("click", function () { if (auth) auth.signOut(); });
+
+      /* ---------- هوية الخادم (اسم + لون): بتظهر للأدمن بس ---------- */
+      var COLORS = ["#e53935", "#fb8c00", "#fdd835", "#43a047", "#00897b", "#1e88e5", "#3949ab", "#8e24aa", "#d81b60", "#6d4c41", "#546e7a", "#00acc1"];
+      var servant = null, needIdentity = false;
+      try { servant = JSON.parse(localStorage.getItem("aft_servant_v1") || "null"); } catch (e) { servant = null; }
+      if (servant && (!servant.name || !servant.color)) servant = null;
+      function isServantRole() { return state.role === "boys" || state.role === "girls"; }
+      function dot(c) { return h("span", { style: "display:inline-block;width:11px;height:11px;border-radius:50%;background:" + c + ";margin-inline:4px;vertical-align:middle;border:1px solid rgba(0,0,0,.3)" }); }
+      function updateWho() {
+        var b = $("whoBtn");
+        if (!isServantRole() || !servant) { b.hidden = true; return; }
+        b.hidden = false; b.textContent = "";
+        b.appendChild(dot(servant.color)); b.appendChild(document.createTextNode(servant.name + " (تغيير)"));
+      }
+      var idBox = h("div", { class: "modal", hidden: "" }, h("div", { class: "sheet", id: "idSheet" }));
+      document.body.appendChild(idBox);
+      function openIdentity() {
+        var sh = $("idSheet"); sh.textContent = "";
+        var pick = servant ? servant.color : "";
+        var nameIn = h("input", { type: "text", placeholder: "اسمك", value: servant ? servant.name : "", "aria-label": "اسمك", maxlength: "30" });
+        var pal = h("div", { class: "bar" });
+        var save = h("button", { class: "btn primary", type: "button", text: "حفظ" });
+        function check() { save.disabled = !nameIn.value.trim() || !pick; }
+        function drawPal() {
+          pal.textContent = "";
+          COLORS.forEach(function (c) {
+            var b = h("button", { type: "button", "aria-label": "لون", "aria-pressed": String(pick === c), style: "width:38px;height:38px;border-radius:50%;cursor:pointer;background:" + c + ";border:" + (pick === c ? "4px solid var(--ink)" : "2px solid var(--line)") });
+            b.addEventListener("click", function () { pick = c; drawPal(); check(); });
+            pal.appendChild(b);
+          });
+        }
+        drawPal();
+        nameIn.addEventListener("input", check);
+        save.addEventListener("click", function () {
+          servant = { name: nameIn.value.trim(), color: pick };
+          try { localStorage.setItem("aft_servant_v1", JSON.stringify(servant)); } catch (e) { }
+          needIdentity = false; idBox.hidden = true; updateWho();
+        });
+        sh.appendChild(h("h2", { text: "مين بيسجّل دلوقتي؟" }));
+        sh.appendChild(h("p", { class: "muted", text: "اكتب اسمك واختار لونك. أي افتقاد هتسجّله هيتسجل باسمك ولونك، وبيظهر للأدمن بس." }));
+        sh.appendChild(nameIn);
+        sh.appendChild(h("div", { style: "margin:10px 0" }, pal));
+        var bar = h("div", { class: "bar" }, save);
+        if (servant) bar.appendChild(h("button", { class: "btn", type: "button", text: "إلغاء", onclick: function () { idBox.hidden = true; needIdentity = false; } }));
+        sh.appendChild(bar);
+        check(); idBox.hidden = false;
+      }
+      $("whoBtn").addEventListener("click", openIdentity);
+      function afterLogin() { updateWho(); if (isServantRole() && (!servant || needIdentity)) openIdentity(); }
+      /* بيسجّل مين الخادم اللي افتقد (collection منفصلة، الأدمن بس بيقراها) */
+      function logBy(k, entry) {
+        if (!isServantRole() || !servant || !dbRef) return;
+        var rec = { d: entry.d, t: entry.t, by: servant.name, c: servant.color };
+        queue("vl" + k.id, function () { return dbRef.collection("visitlog").doc(k.coll + "_" + k.id).set({ log: firebase.firestore.FieldValue.arrayUnion(rec) }, { merge: true }); });
+      }
+      function byFor(k, d, types) {
+        var arr = state.vlog[k.coll + "_" + k.id] || [], out = [], seen = {};
+        arr.forEach(function (x) {
+          if (x.d === d && (!types || types.indexOf(x.t) > -1)) { var key = x.by + "|" + x.c; if (!seen[key]) { seen[key] = 1; out.push(x); } }
+        });
+        return out;
+      }
+      function histLabel(k, v) {
+        var sp = h("span", { text: dateLabel(v.d) + " — " + (DISPLAY[v.t] || v.t) + (v.n ? " (" + v.n + ")" : "") });
+        if (state.role === "all") byFor(k, v.d, [v.t]).forEach(function (x) { sp.appendChild(dot(x.c)); sp.appendChild(document.createTextNode(x.by)); });
+        return sp;
+      }
+
+      /* ---------- الصور ---------- */
+      function avatar(k, big) {
+        var cls = "av" + (big ? " big" : "");
+        if (k.photo) return h("img", { class: cls, src: k.photo, alt: k.name });
+        return h("div", { class: cls, text: k.gender === "boys" ? "👦" : "👧", "aria-hidden": "true" });
+      }
+      function setPhoto(k, file, done) {
+        var img = new Image(), url = URL.createObjectURL(file);
+        img.onload = function () {
+          var max = 360, r = Math.min(1, max / Math.max(img.width, img.height));
+          var c = document.createElement("canvas");
+          c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(url);
+          k.photo = c.toDataURL("image/jpeg", 0.75);
+          queue("p" + k.id, function () { return ref(k).set({ photo: k.photo }, { merge: true }); });
+          render(); done("");
+        };
+        img.onerror = function () { URL.revokeObjectURL(url); done("الصورة دي مش مدعومة. جرّب صورة تانية."); };
+        img.src = url;
+      }
+
+      /* ---------- التنبيهات ---------- */
+      function phoneButtons(k, text) {
+        var bar = [];
+        [k.phone, k.phone2].forEach(function (p, i) {
+          if (!p) return;
+          bar.push(h("a", { class: "btn", href: "tel:" + p, text: "📞 " + (i ? "الاحتياطي" : "اتصل") }));
+          var w = waLink(p, text);
+          if (w && i === 0) bar.push(h("a", { class: "btn", href: w, target: "_blank", rel: "noopener", text: "واتساب" }));
+        });
+        return bar;
+      }
+
+      function renderAlerts() {
+        var box = $("alerts");
+        box.textContent = "";
+        var today = todayStr(), kids = allKids(), year = today.slice(0, 4);
+
+        /* أعياد الميلاد النهارده: بتظهر لأي خادم في الصفحة الرئيسية ومعاها الاتصال */
+        kids.filter(function (k) { return isBdayToday(k, today); }).forEach(function (k) {
+          var done = k.greeted === year;
+          var bar = h("div", { class: "bar" });
+          phoneButtons(k, "كل سنة وإنت طيب يا " + k.name + " 🎂").forEach(function (b) { bar.appendChild(b); });
+          var g = h("button", { class: "btn" + (done ? "" : " primary"), type: "button", text: done ? "✓ اتعيّد عليه" : "اتعيّد عليه ✓" });
+          g.addEventListener("click", function () { k.greeted = done ? "" : year; persistKid(k); render(); });
+          bar.appendChild(g);
+          box.appendChild(h("div", { class: "banner bday" },
+            h("strong", { text: "🎂 النهارده عيد ميلاد " + (k.gender === "boys" ? "👦 " : "👧 ") + k.name + " (سنة " + gradeLabel(k.grade) + ")" + (done ? "" : " — اتصل بيه وعيّد عليه") }), bar));
+        });
+
+        /* أعياد الميلاد الجاية */
+        var upcoming = kids.map(function (k) { return { k: k, d: daysToBirthday(k, today) }; })
+          .filter(function (x) { return x.d >= 1 && x.d <= BDAY_DAYS; }).sort(function (a, b) { return a.d - b.d; });
+        if (upcoming.length) {
+          var pn = h("div", { class: "banner" }, h("strong", { text: "🎂 أعياد ميلاد الأيام الجاية" }));
+          upcoming.forEach(function (x) {
+            var k = x.k, line = h("div", { class: "bar", style: "margin:8px 0 0" });
+            line.appendChild(h("span", { text: (k.gender === "boys" ? "👦 " : "👧 ") + k.name + " — " + k.birthday.slice(8) + "/" + k.birthday.slice(5, 7) + " (" + (x.d === 1 ? "بكرة" : "بعد " + x.d + " أيام") + ")" }));
+            phoneButtons(k, "كل سنة وإنت طيب يا " + k.name + " 🎂").forEach(function (b) { line.appendChild(b); });
+            pn.appendChild(line);
+          });
+          box.appendChild(pn);
+        }
+
+        var late = kids.filter(function (k) { return statusOf(k, today).late; });
+        if (late.length) {
+          late.sort(function (a, b) { return statusOf(b, today).days - statusOf(a, today).days; });
+          var bar2 = h("div", { class: "bar" });
+          bar2.appendChild(h("button", { class: "btn", type: "button", text: "اعرض المتأخرين", onclick: function () { stFilter = "late"; $("stSel").value = "late"; render(); } }));
+          bar2.appendChild(h("button", {
+            class: "btn", type: "button", text: "ابعت تذكير واتساب للخدام", onclick: function () {
+              var lines = ["⚠️ تذكير افتقاد — المتأخرين (" + ALERT_DAYS + " أيام أو أكتر):"];
+              late.forEach(function (k) { var s = statusOf(k, today); lines.push("- " + k.name + " (" + (k.gender === "boys" ? "ولد" : "بنت") + " " + gradeLabel(k.grade) + ") — " + (s.never ? "لسه ما اتفتقدش" : "من " + s.days + " يوم")); });
+              window.open("https://wa.me/?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+            }
+          }));
+          box.appendChild(h("div", { class: "banner late" }, h("strong", { text: "⚠️ " + late.length + " من المخدومين متأخرين في الافتقاد (" + ALERT_DAYS + " أيام أو أكتر)" }), bar2));
+        }
+
+        if (kids.length) {
+          var weekDone = kids.filter(function (k) { return statusOf(k, today).weekDone; }).length;
+          box.appendChild(h("div", { class: "muted", style: "margin-bottom:6px", text: "اتفتقدوا ومش محتاجين افتقاد دلوقتي: " + weekDone + " من " + kids.length + (CYCLE_MODE === "week" ? " (بيتصفّر كل " + ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"][WEEK_START_DAY] + ")" : " (كل مخدوم بيحتاج افتقاد كل " + CYCLE_DAYS + " أيام)") }));
+        }
+      }
+
+      /* ---------- الفلاتر والقايمة ---------- */
+      function tile(label, count, pressed, color, onclick) {
+        var b = h("button", { class: "tile", type: "button", "aria-pressed": String(pressed), onclick: onclick },
+          h("div", { class: "band" }),
+          h("div", { class: "body" }, h("div", { class: "count", text: String(count) }), h("div", { class: "name", text: label })));
+        b.style.setProperty("--c", color);
+        return b;
+      }
+      function renderTiles() {
+        var box = $("tiles"), kids = allKids();
+        box.textContent = "";
+        box.appendChild(tile("الكل", kids.length, gFilter === "all" && grFilter === "all", "var(--accent)", function () { gFilter = "all"; grFilter = "all"; render(); }));
+        if (state.role === "all") {
+          box.appendChild(tile("الولاد", state.kidsBy.boys.length, gFilter === "boys", "#2563eb", function () { gFilter = gFilter === "boys" ? "all" : "boys"; render(); }));
+          box.appendChild(tile("البنات", state.kidsBy.girls.length, gFilter === "girls", "#c2456a", function () { gFilter = gFilter === "girls" ? "all" : "girls"; render(); }));
+        }
+        box.appendChild(tile("سنة خامسة", kids.filter(function (k) { return k.grade === 5; }).length, grFilter === "5", "#2f7d6d", function () { grFilter = grFilter === "5" ? "all" : "5"; render(); }));
+        box.appendChild(tile("سنة سادسة", kids.filter(function (k) { return k.grade === 6; }).length, grFilter === "6", "#7a4fb0", function () { grFilter = grFilter === "6" ? "all" : "6"; render(); }));
+      }
+
+      function renderList() {
+        var box = $("list"), today = todayStr(), q = norm(query);
+        box.textContent = "";
+        var items = allKids().filter(function (k) {
+          if (gFilter !== "all" && k.gender !== gFilter) return false;
+          if (grFilter !== "all" && String(k.grade) !== grFilter) return false;
+          var s = statusOf(k, today);
+          if (stFilter === "todo" && s.weekDone) return false;
+          if (stFilter === "late" && !s.late) return false;
+          if (!q) return true;
+          return norm(k.name).indexOf(q) > -1 || norm(k.father).indexOf(q) > -1 || norm(k.address).indexOf(q) > -1 || k.phone.indexOf(q) > -1 || k.phone2.indexOf(q) > -1;
+        });
+        $("resultInfo").textContent = allKids().length ? "العدد: " + items.length : "";
+        if (!items.length) {
+          box.appendChild(h("div", { class: "empty", text: allKids().length ? "مفيش نتايج بالفلتر ده." : "لسه ماضفتش حد. اكتب الاسم فوق واضغط إضافة." }));
+          return;
+        }
+        items.sort(function (a, b) {
+          var sa = statusOf(a, today), sb = statusOf(b, today);
+          if (sa.late !== sb.late) return sa.late ? -1 : 1;
+          if (sa.late && sa.days !== sb.days) return sb.days - sa.days;
+          return a.name.localeCompare(b.name, "ar");
+        });
+        items.forEach(function (k) {
+          var s = statusOf(k, today);
+          var method = s.lastTypes.length ? " — " + s.lastTypes.map(function (t) { return DISPLAY[t] || t; }).join(" + ") : "";
+          var txt = s.done ? "✓ اتفتقد" + method + " • الافتقاد الجاي " + nextNote(s)
+            : s.never ? "🔔 محتاج افتقاد (لسه ما اتفتقدش)"
+              : "🔔 محتاج افتقاد — آخر افتقاد من " + s.days + " يوم" + method + (s.overdue > 0 ? " • متأخر " + s.overdue + " يوم" : "");
+          var cls = s.late ? "late-text" : (s.done ? "ok-text" : "todo-text");
+          var who = h("div", { class: "who" },
+            h("strong", { text: (k.gender === "boys" ? "👦 " : "👧 ") + k.name }),
+            h("span", { class: cls, text: (s.late ? "⚠️ " : "") + txt + " • سنة " + gradeLabel(k.grade) }));
+          if (state.role === "all" && s.last) {
+            var tg = byFor(k, s.last, s.lastTypes);
+            if (tg.length) {
+              var by = h("span", { class: "muted" }, document.createTextNode("افتقده: "));
+              tg.forEach(function (x) { by.appendChild(dot(x.c)); by.appendChild(document.createTextNode(x.by + " ")); });
+              who.appendChild(by);
+            }
+          }
+          var row = h("div", { class: "row " + (s.late ? "late" : (s.weekDone ? "ok" : "todo")) }, avatar(k), who);
+          if (isBdayToday(k, today)) row.appendChild(h("span", { class: "chip bday", text: "🎂 عيد ميلاده النهارده" + (k.greeted === today.slice(0, 4) ? " ✓" : "") }));
+          if (k.address) who.appendChild(h("span", { class: "muted", text: "📍 " + k.address }));
+          if (k.phone) row.appendChild(h("a", { class: "btn", href: "tel:" + k.phone, "aria-label": "اطلب " + k.name, text: "☎ اطلبه" }));
+          if (k.address) row.appendChild(h("a", { class: "btn", href: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(k.address), target: "_blank", rel: "noopener", "aria-label": "افتح موقع " + k.name + " على الخريطة", text: "📍 الموقع" }));
+          var logBar = h("div", { class: "bar", style: "margin:0" }, h("span", { class: "muted", text: "سجّل الافتقاد:" }));
+          VISIT_TYPES.forEach(function (t) {
+            var done = s.todayTypes.indexOf(t) > -1;
+            var lb = h("button", { class: "btn" + (done ? " primary" : ""), type: "button", text: (done ? "✓ " : "") + DISPLAY[t] });
+            lb.disabled = done;
+            lb.addEventListener("click", function () { addVisit(k, { d: todayStr(), t: t, n: "" }); });
+            logBar.appendChild(lb);
+          });
+          row.appendChild(logBar);
+          row.appendChild(h("button", { class: "btn", type: "button", text: "التفاصيل", onclick: function () { openModal(k.id); } }));
+          box.appendChild(row);
+        });
+      }
+
+      /* ---------- إضافة ---------- */
+      function addKid() {
+        var n = $("newName"), name = n.value.trim();
+        if (!name) { n.focus(); return; }
+        var gender = state.role === "boys" ? "boys" : state.role === "girls" ? "girls" : $("newGender").value;
+        var k = {
+          id: uid(), coll: gender, gender: gender, name: name, phone: $("newPhone").value.trim(), phone2: $("newPhone2").value.trim(),
+          father: $("newFather").value.trim(), address: $("newAddress").value.trim(), grade: +$("newGrade").value === 6 ? 6 : 5, birthday: $("newBday").value || "", added: todayStr(), visits: [], greeted: "", att: []
+        };
+        state.kidsBy[gender].push(k);
+        queue("k" + k.id, function () { return ref(k).set(Object.assign(kidBody(k), { visits: [] }), { merge: true }); });
+        ["newName", "newPhone", "newPhone2", "newFather", "newAddress", "newBday"].forEach(function (id) { $(id).value = ""; });
+        render(); n.focus();
+      }
+      $("addBtn").addEventListener("click", addKid);
+      $("newName").addEventListener("keydown", function (e) { if (e.key === "Enter") addKid(); });
+      $("q").addEventListener("input", function (e) { query = e.target.value; renderList(); });
+      $("stSel").addEventListener("change", function (e) { stFilter = e.target.value; renderList(); });
+
+      /* ---------- التفاصيل ---------- */
+      function closeModal() { openId = null; $("modal").hidden = true; $("sheet").textContent = ""; }
+      $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && openId) closeModal(); });
+
+      function openModal(id) {
+        var k = kidById(id);
+        if (!k) return;
+        openId = id;
+        var sheet = $("sheet");
+        sheet.textContent = "";
+        var title = h("h2", { text: k.name }); title.id = "mTitle";
+        sheet.appendChild(h("div", { class: "top" }, title, h("button", { class: "btn", type: "button", text: "إغلاق", onclick: closeModal })));
+
+        var nameIn = h("input", { type: "text", value: k.name, "aria-label": "الاسم" });
+        var phIn = h("input", { type: "tel", value: k.phone, "aria-label": "رقم التليفون" });
+        var ph2In = h("input", { type: "tel", value: k.phone2, "aria-label": "الرقم الاحتياطي" });
+        var faIn = h("input", { type: "text", value: k.father, "aria-label": "أب الاعتراف" });
+        var adIn = h("input", { type: "text", value: k.address, "aria-label": "العنوان" });
+        var grSel = h("select", { "aria-label": "السنة" }, h("option", { value: "5", text: "سنة خامسة" }), h("option", { value: "6", text: "سنة سادسة" }));
+        grSel.value = String(k.grade);
+        var bdIn = h("input", { type: "date", value: k.birthday, "aria-label": "تاريخ الميلاد" });
+        var save = h("button", { class: "btn primary", type: "button", text: "حفظ البيانات" });
+        save.addEventListener("click", function () {
+          if (nameIn.value.trim()) k.name = nameIn.value.trim();
+          k.phone = phIn.value.trim(); k.phone2 = ph2In.value.trim(); k.father = faIn.value.trim(); k.address = adIn.value.trim();
+          k.grade = +grSel.value === 6 ? 6 : 5; k.birthday = bdIn.value || "";
+          persistKid(k); render();
+          save.textContent = "اتحفظ ✓"; setTimeout(function () { save.textContent = "حفظ البيانات"; }, 1500);
+        });
+        var lbl = function (t, el, full) { return h("label", { class: "f" + (full ? " full" : "") }, document.createTextNode(t), el); };
+        sheet.appendChild(h("div", { class: "fields" },
+          lbl("الاسم", nameIn, true), lbl("رقم التليفون", phIn), lbl("رقم احتياطي", ph2In),
+          lbl("أب الاعتراف", faIn, true), lbl("العنوان", adIn, true), lbl("السنة", grSel), lbl("تاريخ الميلاد", bdIn),
+          h("div", { class: "full" }, save)));
+
+        var pBox = h("div", { class: "bar", style: "margin-top:6px" });
+        function drawPhoto(msg) {
+          pBox.textContent = "";
+          pBox.appendChild(avatar(k, true));
+          var inp = h("input", { type: "file", accept: "image/*", hidden: "" });
+          inp.addEventListener("change", function () {
+            var f = inp.files && inp.files[0];
+            if (f) setPhoto(k, f, drawPhoto);
+          });
+          pBox.appendChild(inp);
+          pBox.appendChild(h("button", { class: "btn", type: "button", text: k.photo ? "تغيير الصورة" : "📷 إضافة صورة", onclick: function () { inp.click(); } }));
+          if (k.photo) pBox.appendChild(h("button", {
+            class: "btn danger", type: "button", text: "حذف الصورة", onclick: function () {
+              k.photo = ""; queue("p" + k.id, function () { return ref(k).set({ photo: "" }, { merge: true }); }); render(); drawPhoto("");
+            }
+          }));
+          if (msg) pBox.appendChild(h("span", { class: "late-text", text: msg }));
+        }
+        drawPhoto("");
+        sheet.appendChild(pBox);
+
+        sheet.appendChild(h("div", { id: "mDyn" }));
+
+        sheet.appendChild(h("h2", { text: "تسجيل افتقاد", style: "margin-top:14px" }));
+        var dIn = h("input", { type: "date", value: todayStr(), "aria-label": "التاريخ" });
+        var tSel = h("select", { "aria-label": "نوع الافتقاد" });
+        VISIT_TYPES.forEach(function (t) { tSel.appendChild(h("option", { value: t, text: DISPLAY[t] || t })); });
+        var nIn = h("input", { type: "text", placeholder: "ملاحظة (اختياري)", "aria-label": "ملاحظة" });
+        var add = h("button", { class: "btn primary", type: "button", text: "إضافة" });
+        add.addEventListener("click", function () { if (dIn.value) { addVisit(k, { d: dIn.value, t: tSel.value, n: nIn.value.trim() }); nIn.value = ""; } });
+        sheet.appendChild(h("div", { class: "bar" }, dIn, tSel, nIn, add));
+
+        var del = h("button", { class: "btn danger", type: "button", text: "حذف المخدوم" });
+        del.addEventListener("click", function () {
+          arm("dk" + k.id, del, "حذف المخدوم", function () {
+            state.kidsBy[k.coll] = state.kidsBy[k.coll].filter(function (x) { return x.id !== k.id; });
+            queue("k" + k.id, function () { return ref(k).delete(); });
+            if (window.AFT_kidDeleted) window.AFT_kidDeleted(k);
+            closeModal(); render();
+          });
+        });
+        sheet.appendChild(h("div", { style: "margin-top:14px" }, del));
+        $("modal").hidden = false;
+        renderModalDyn();
+      }
+
+      function renderModalDyn() {
+        var box = $("mDyn");
+        if (!box) return;
+        var k = kidById(openId);
+        if (!k) { closeModal(); return; }
+        box.textContent = "";
+        var today = todayStr(), s = statusOf(k, today);
+        var contact = h("div", { class: "bar" });
+        phoneButtons(k, "").forEach(function (b) { contact.appendChild(b); });
+        box.appendChild(contact);
+        if (k.address) {
+          var adLine = h("div", { class: "bar" }, h("span", { text: "📍 " + k.address }),
+            h("a", { class: "btn", href: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(k.address), target: "_blank", rel: "noopener", text: "🗺️ الخريطة" }));
+          box.appendChild(adLine);
+        }
+
+        box.appendChild(h("div", {
+          class: s.late ? "late-text" : (s.done ? "ok-text" : "muted"),
+          text: (s.late ? "⚠️ " : "") + (s.done ? "اتفتقد — الافتقاد الجاي " + nextNote(s) : s.never ? "لسه ما اتفتقدش (مضاف من " + s.days + " يوم)" : "محتاج افتقاد — آخر افتقاد من " + s.days + " يوم" + (s.overdue > 0 ? " (متأخر " + s.overdue + " يوم)" : ""))
+        }));
+
+        if (k.birthday) {
+          var d2b = daysToBirthday(k, today);
+          box.appendChild(h("div", { class: "muted", style: "margin-top:6px", text: "🎂 عيد الميلاد: " + k.birthday.slice(8) + "/" + k.birthday.slice(5, 7) + (d2b === 0 ? " (النهارده)" : d2b < 30 ? " (بعد " + d2b + " يوم)" : "") }));
+          if (isBdayToday(k, today)) {
+            var year = today.slice(0, 4), done = k.greeted === year;
+            var g = h("button", { class: "btn" + (done ? "" : " primary"), type: "button", text: done ? "✓ اتعيّد عليه" : "اتعيّد عليه" });
+            g.addEventListener("click", function () { k.greeted = done ? "" : year; persistKid(k); render(); });
+            box.appendChild(g);
+          }
+        }
+
+        box.appendChild(h("h2", { text: "سجل الافتقاد", style: "margin-top:12px" }));
+        var hist = h("div", { class: "hist" });
+        var list = k.visits.slice().sort(function (a, b) { return a.d < b.d ? 1 : a.d > b.d ? -1 : 0; });
+        if (!list.length) hist.appendChild(h("div", { class: "muted", text: "لسه مفيش سجل." }));
+        list.forEach(function (v) {
+          hist.appendChild(h("div", { class: "item" },
+            histLabel(k, v),
+            h("button", { class: "btn danger", type: "button", "aria-label": "حذف", text: "×", onclick: function () { delVisit(k, v); } })));
+        });
+        box.appendChild(hist);
+        var mt = $("mTitle"); if (mt) mt.textContent = k.name;
+      }
+
+      /* ---------- نسخة احتياطية (ملف Excel مقروء) ---------- */
+      /* ===== backup-pure-start ===== */
+      var PEOPLE_HEADERS = ["الاسم", "النوع", "السنة", "رقم التليفون", "رقم احتياطي", "أب الاعتراف", "العنوان", "تاريخ الميلاد", "تاريخ الإضافة", "آخر افتقاد", "طريقة آخر افتقاد", "عدد الافتقادات", "محتاج افتقاد", "متأخر"];
+      var VISIT_HEADERS = ["الاسم", "النوع", "السنة", "التاريخ", "الطريقة", "ملاحظة"];
+      var PLAIN = { "تليفون": "اتصال", "رسالة": "رسالة", "زيارة": "زيارة", "افتقاد": "افتقاد" };
+      function buildBackup(kids, today) {
+        var sorted = kids.slice().sort(function (a, b) {
+          if (a.gender !== b.gender) return a.gender === "boys" ? -1 : 1;
+          if (a.grade !== b.grade) return a.grade - b.grade;
+          return a.name.localeCompare(b.name, "ar");
+        });
+        var people = [], visits = [];
+        sorted.forEach(function (k) {
+          var st = statusOf(k, today);
+          var kind = k.gender === "boys" ? "ولد" : "بنت", yr = "سنة " + gradeLabel(k.grade);
+          people.push({
+            "الاسم": k.name, "النوع": kind, "السنة": yr, "رقم التليفون": k.phone, "رقم احتياطي": k.phone2,
+            "أب الاعتراف": k.father, "العنوان": k.address, "تاريخ الميلاد": k.birthday, "تاريخ الإضافة": k.added,
+            "آخر افتقاد": st.last, "طريقة آخر افتقاد": st.lastTypes.map(function (t) { return PLAIN[t] || t; }).join(" + "),
+            "عدد الافتقادات": k.visits.length, "محتاج افتقاد": st.done ? "لا" : "نعم", "متأخر": st.late ? "نعم" : "لا"
+          });
+          k.visits.slice().sort(function (a, b) { return a.d < b.d ? 1 : a.d > b.d ? -1 : 0; }).forEach(function (v) {
+            visits.push({ "الاسم": k.name, "النوع": kind, "السنة": yr, "التاريخ": v.d, "الطريقة": PLAIN[v.t] || v.t, "ملاحظة": v.n || "" });
+          });
+        });
+        return { people: people, visits: visits };
+      }
+      function toCsv(rows, headers, phoneCols) {
+        function esc(v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }
+        var lines = [headers.map(esc).join(",")];
+        rows.forEach(function (r) {
+          lines.push(headers.map(function (hd) {
+            var v = r[hd];
+            // الأرقام بتتحط كنص عشان الصفر اللي في الأول ما يضيعش في Excel
+            if (phoneCols.indexOf(hd) > -1 && v) return '="' + String(v).replace(/"/g, "") + '"';
+            return esc(v);
+          }).join(","));
+        });
+        return "\ufeff" + lines.join("\r\n");
+      }
+      /* ===== backup-pure-end ===== */
+
+      function saveBlob(blob, name) {
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+      }
+      function backupMsg(t) { $("backupMsg").textContent = t; }
+      function backupTag() { return (state.role || "all") + "-" + todayStr(); }
+      function backupWho() { return state.role === "boys" ? "ولد" : state.role === "girls" ? "بنت" : "مخدوم"; }
+      function exportCsv() {
+        var data = buildBackup(allKids(), todayStr());
+        try {
+          saveBlob(new Blob([toCsv(data.people, PEOPLE_HEADERS, ["رقم التليفون", "رقم احتياطي"])], { type: "text/csv;charset=utf-8" }), "aftkad-" + backupTag() + ".csv");
+          backupMsg("اتحمّل ملف CSV فيه " + data.people.length + " " + backupWho() + ". افتحه بـ Excel أو Google Sheets.");
+        } catch (e) { backupMsg("حصلت مشكلة في التحميل. جرّب تاني."); }
+      }
+      function loadXlsx(cb) {
+        if (window.XLSX) { cb(null); return; }
+        var sc = document.createElement("script");
+        sc.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+        sc.onload = function () { cb(window.XLSX ? null : new Error("xlsx")); };
+        sc.onerror = function () { cb(new Error("load")); };
+        document.head.appendChild(sc);
+      }
+      function exportExcel() {
+        var data = buildBackup(allKids(), todayStr());
+        if (!data.people.length) { backupMsg("لسه مفيش مخدومين تتسجل في النسخة."); return; }
+        backupMsg("بيجهز الملف...");
+        loadXlsx(function (err) {
+          if (err) { backupMsg("مقدرتش أحمّل أداة الـ Excel (اتأكد من النت). نزّلت CSV بدلها."); exportCsv(); return; }
+          try {
+            var X = window.XLSX, wb = X.utils.book_new();
+            var ws1 = X.utils.json_to_sheet(data.people, { header: PEOPLE_HEADERS });
+            ws1["!cols"] = [18, 7, 11, 15, 15, 16, 28, 13, 13, 13, 14, 11, 14, 7].map(function (w) { return { wch: w }; });
+            var ws2 = X.utils.json_to_sheet(data.visits, { header: VISIT_HEADERS });
+            ws2["!cols"] = [18, 7, 11, 13, 10, 28].map(function (w) { return { wch: w }; });
+            X.utils.book_append_sheet(wb, ws1, "المخدومين");
+            X.utils.book_append_sheet(wb, ws2, "سجل الافتقاد");
+            wb.Workbook = { Views: [{ RTL: true }] };
+            X.writeFile(wb, "aftkad-" + backupTag() + ".xlsx");
+            backupMsg("اتحمّل ملف Excel فيه " + data.people.length + " " + backupWho() + " و" + data.visits.length + " سجل افتقاد.");
+          } catch (e) { backupMsg("الـ Excel ما اشتغلش. نزّلت CSV بدلها."); exportCsv(); }
+        });
+      }
+      $("exportBtn").addEventListener("click", exportExcel);
+      $("exportCsvBtn").addEventListener("click", exportCsv);
+
+      /* ---------- render ---------- */
+      function render() {
+        if (window.AFT_render) window.AFT_render();
+        if (!state.role) return;
+        renderAlerts();
+        renderTiles();
+        renderList();
+        if (openId) renderModalDyn();
+      }
+
+      /* بيعرّض الدوال لإضافة الحضور والـ QR وإخوة الرب (السكريبت اللي تحت) */
+      window.AFT = {
+        state: state, db: function () { return dbRef; }, allKids: allKids, kidById: kidById,
+        h: h, flash: flash, todayStr: todayStr, gradeLabel: gradeLabel, norm: norm, render: render, avatar: avatar
+      };
+
+      initFirebase();
+    })();
+  </script>
+
+  <!-- ===== الحضور + QR + إخوة الرب ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+  <script>
+    (function () {
+      var A = window.AFT; if (!A) return;
+      var h = A.h;
+      function $(i) { return document.getElementById(i); }
+      var START = "2026-10-09"; /* أول جمعة. آخر جمعة بعدها بـ 52 أسبوع = 2027-10-08 */
+
+      var FR = [], d0 = new Date(START + "T00:00:00Z");
+      for (var i = 0; i < 53; i++) { FR.push(d0.toISOString().slice(0, 10)); d0.setUTCDate(d0.getUTCDate() + 7); }
+      function fmt(d) { try { return new Date(d + "T00:00:00Z").toLocaleDateString("ar-EG-u-nu-latn", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }); } catch (e) { return d; } }
+      var sel = (function () { var t = A.todayStr(), r = FR[0]; FR.forEach(function (f) { if (f <= t) r = f; }); return r; })();
+      var q = "";
+
+      /* ===== لوحة الحضور (مشتركة بين كل الخدام: ولاد وبنات) ===== */
+      /* كل مخدوم له سجل صغير في collection اسمه attendance فيه الاسم والنوع والسنة والحضور بس (من غير تليفون ولا عنوان) */
+      var roster = {}, rosterReady = false, rosterUnsub = null, pending = {};
+      function kidsList() { return Object.keys(roster).map(function (id) { return roster[id]; }).filter(function (k) { return k.name; }); }
+      var att = h("section", { class: "panel", id: "attPanel" });
+      att.innerHTML = '<h2>🗓️ حضور الجمعة (الولاد والبنات)</h2>' +
+        '<div class="bar"><select id="attDate" aria-label="الجمعة"></select>' +
+        '<button class="btn primary" id="attScan" type="button">📷 مسح QR</button>' +
+        '<button class="btn" id="attPrint" type="button">🖨️ طباعة كل الأكواد</button></div>' +
+        '<div class="bar"><input type="search" id="attQ" placeholder="ابحث بالاسم" aria-label="بحث">' +
+        '<select id="attG" aria-label="ولاد ولا بنات"><option value="all">ولاد وبنات</option><option value="boys">ولاد</option><option value="girls">بنات</option></select>' +
+        '<select id="attFilter" aria-label="فلتر"><option value="all">الكل</option><option value="in">الحاضرين</option><option value="out">الغايبين</option></select></div>' +
+        '<div class="muted" id="attCount" style="margin-bottom:8px"></div><div class="list" id="attList"></div>';
+      $("tab-att").appendChild(att);
+      FR.forEach(function (f) { $("attDate").appendChild(h("option", { value: f, text: fmt(f) })); });
+      $("attDate").value = sel;
+      $("attDate").addEventListener("change", function (e) { sel = e.target.value; renderAtt(); });
+      $("attQ").addEventListener("input", function (e) { q = e.target.value; renderAtt(); });
+      $("attFilter").addEventListener("change", renderAtt);
+      $("attG").addEventListener("change", renderAtt);
+
+      function has(k, d) { return !!k.att && k.att.indexOf(d) > -1; }
+      function mark(k, d, on) {
+        if (!k.att) k.att = [];
+        var i = k.att.indexOf(d);
+        if (on && i < 0) k.att.push(d);
+        if (!on && i > -1) k.att.splice(i, 1);
+        A.db().collection("attendance").doc(k.id).set({ att: firebase.firestore.FieldValue[on ? "arrayUnion" : "arrayRemove"](d) }, { merge: true })
+          .catch(function () { A.flash("مقدرتش أحفظ الحضور. جرّب تاني."); });
+        renderAtt();
+      }
+      function renderAtt() {
+        var kids = kidsList(), box = $("attList"), nq = A.norm(q), f = $("attFilter").value, g = $("attG").value;
+        box.textContent = "";
+        var shown = kids.filter(function (k) { return g === "all" || k.gender === g; });
+        $("attCount").textContent = "حضر " + shown.filter(function (k) { return has(k, sel); }).length + " من " + shown.length;
+        shown.filter(function (k) {
+          var on = has(k, sel);
+          if (f === "in" && !on) return false;
+          if (f === "out" && on) return false;
+          return !nq || A.norm(k.name).indexOf(nq) > -1;
+        }).sort(function (a, b) { return a.name.localeCompare(b.name, "ar"); }).forEach(function (k) {
+          var on = has(k, sel);
+          var row = h("div", { class: "row " + (on ? "ok" : "") }, A.avatar(k),
+            h("div", { class: "who" }, h("strong", { text: (k.gender === "boys" ? "👦 " : "👧 ") + k.name }), h("span", { class: "muted", text: "سنة " + A.gradeLabel(k.grade) })));
+          var b = h("button", { class: "btn" + (on ? " primary" : ""), type: "button", text: on ? "✓ حضر" : "تسجيل حضور" });
+          b.addEventListener("click", function () { mark(k, sel, !on); });
+          row.appendChild(b);
+          row.appendChild(h("button", { class: "btn", type: "button", text: "QR", onclick: function () { showQr(k); } }));
+          box.appendChild(row);
+        });
+      }
+      /* بيحدّث سجل الحضور بأسماء مخدومين الخادم ده (الاسم والسنة بس) */
+      function syncRoster() {
+        if (!rosterReady) return;
+        A.allKids().forEach(function (k) {
+          var r = roster[k.id], miss = (k.att || []).filter(function (d) { return !r || r.att.indexOf(d) < 0; });
+          if (r && r.name === k.name && r.grade === k.grade && r.gender === k.gender && !miss.length) return;
+          var sig = k.name + "|" + k.grade + "|" + k.gender + "|" + miss.join(",");
+          if (pending[k.id] === sig) return;
+          pending[k.id] = sig;
+          var data = { name: k.name, gender: k.gender, grade: k.grade };
+          if (miss.length) data.att = firebase.firestore.FieldValue.arrayUnion.apply(null, miss);
+          A.db().collection("attendance").doc(k.id).set(data, { merge: true }).catch(function () { delete pending[k.id]; });
+        });
+      }
+      function startRoster() {
+        rosterUnsub = A.db().collection("attendance").onSnapshot(function (s) {
+          roster = {};
+          s.docs.forEach(function (d) {
+            var v = d.data() || {}, gd = v.gender === "girls" ? "girls" : "boys";
+            roster[d.id] = {
+              id: d.id, coll: gd, gender: gd, name: String(v.name || ""), grade: v.grade === 6 ? 6 : 5, photo: "",
+              att: Array.isArray(v.att) ? v.att.filter(function (x) { return typeof x === "string"; }) : []
+            };
+          });
+          rosterReady = true; syncRoster(); renderAtt();
+        }, function () { $("attCount").textContent = "مش قادر أقرأ الحضور. لازم تضيف الـ Rule بتاعة attendance في Firebase."; });
+      }
+      window.AFT_kidDeleted = function (k) {
+        A.db().collection("attendance").doc(k.id).delete().catch(function () { });
+        delete roster[k.id]; renderAtt();
+      };
+
+      /* ===== QR ===== */
+      function qrUrl(k) {
+        if (!window.QRCode) return "";
+        var d = document.createElement("div");
+        new QRCode(d, { text: "AFT|" + k.coll + "|" + k.id, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
+        var c = d.querySelector("canvas"); return c ? c.toDataURL("image/png") : "";
+      }
+      var qrBox = h("div", { class: "modal", hidden: "" }, h("div", { class: "sheet", id: "qrSheet" }));
+      document.body.appendChild(qrBox);
+      qrBox.addEventListener("click", function (e) { if (e.target === qrBox) qrBox.hidden = true; });
+      function showQr(k) {
+        var s = $("qrSheet"), u = qrUrl(k); s.textContent = "";
+        if (!u) { s.appendChild(h("p", { text: "مكتبة الـ QR ما اتحمّلتش. اتأكد من النت." })); }
+        else {
+          s.appendChild(h("h2", { text: k.name }));
+          s.appendChild(h("img", { class: "qrimg", src: u, alt: "QR " + k.name }));
+          s.appendChild(h("div", { class: "muted", style: "text-align:center", text: "الكود فيه رقم تعريف بس، من غير أي بيانات شخصية." }));
+          var bar = h("div", { class: "bar", style: "justify-content:center" });
+          bar.appendChild(h("a", { class: "btn primary", href: u, download: "qr-" + k.name + ".png", text: "تحميل الصورة" }));
+          s.appendChild(bar);
+        }
+        s.appendChild(h("div", { class: "bar", style: "justify-content:center" }, h("button", { class: "btn", type: "button", text: "إغلاق", onclick: function () { qrBox.hidden = true; } })));
+        qrBox.hidden = false;
+      }
+      $("attPrint").addEventListener("click", function () {
+        var kids = kidsList().sort(function (a, b) { return a.name.localeCompare(b.name, "ar"); });
+        if (!kids.length || !window.QRCode) { A.flash("مفيش مخدومين أو مكتبة الـ QR مش محمّلة."); return; }
+        var w = window.open("", "_blank"); if (!w) return;
+        var doc = w.document;
+        doc.write('<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>أكواد الحضور</title><style>body{font-family:Tahoma,Arial}.g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.c{border:1px solid #999;padding:8px;text-align:center;break-inside:avoid}.c img{width:100%;max-width:170px}</style><div class="g" id="g"></div></html>');
+        doc.close();
+        var g = doc.getElementById("g");
+        kids.forEach(function (k) {
+          var c = doc.createElement("div"); c.className = "c";
+          var im = doc.createElement("img"); im.src = qrUrl(k);
+          var n = doc.createElement("div"); n.textContent = k.name;
+          c.appendChild(im); c.appendChild(n); g.appendChild(c);
+        });
+        setTimeout(function () { w.print(); }, 500);
+      });
+
+      /* ===== مسح الكود ===== */
+      var stream = null, timer = 0, last = "", lastT = 0;
+      var scanFile = h("input", { type: "file", accept: "image/*", hidden: "" });
+      scanFile.setAttribute("capture", "environment");
+      var scan = h("div", { class: "modal", hidden: "" }, h("div", { class: "sheet" },
+        h("h2", { text: "مسح كود الحضور" }),
+        h("div", { class: "muted", id: "scanDate" }),
+        h("video", { id: "scanVid", playsinline: "", muted: "", autoplay: "" }),
+        h("canvas", { id: "scanCan", hidden: "" }),
+        h("div", { class: "banner", id: "scanMsg", style: "margin-top:10px", text: "..." }),
+        h("div", { class: "bar" },
+          h("button", { class: "btn primary", type: "button", text: "📸 صوّر الكود", onclick: function () { scanFile.click(); } }),
+          h("button", { class: "btn", type: "button", text: "إنهاء", onclick: stopScan })),
+        scanFile));
+      document.body.appendChild(scan);
+      function smsg(t) { $("scanMsg").textContent = t; }
+      function loadLib(cb) {
+        if (window.jsQR) { cb(true); return; }
+        var sc = document.createElement("script");
+        sc.src = "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+        sc.onload = function () { cb(!!window.jsQR); };
+        sc.onerror = function () { cb(false); };
+        document.head.appendChild(sc);
+      }
+      $("attScan").addEventListener("click", function () {
+        stopStream();
+        $("scanDate").textContent = "التسجيل على: " + fmt(sel) + (sel !== A.todayStr() ? " (⚠️ مش تاريخ النهارده)" : "");
+        scan.hidden = false; smsg("بيجهّز الكاميرا...");
+        loadLib(function (ok) {
+          if (!ok) { smsg("❌ مكتبة قراءة الـ QR ما اتحمّلتش. اتأكد من النت وجرّب تاني."); return; }
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            smsg("المتصفح ده مش بيفتح الكاميرا مباشرة (لازم الموقع على https، وافتحه من Chrome أو Safari مش من جوه واتساب أو فيسبوك). استخدم زرار «📸 صوّر الكود».");
+            return;
+          }
+          navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false }).then(function (s) {
+            if (scan.hidden) { s.getTracks().forEach(function (t) { t.stop(); }); return; }
+            stream = s;
+            var v = $("scanVid"); v.muted = true; v.srcObject = s;
+            var pr = v.play(); if (pr && pr.catch) pr.catch(function () { });
+            smsg("وجّه الكاميرا على الكود."); tick();
+          }).catch(function (e) {
+            smsg("الكاميرا مش شغالة (" + ((e && e.name) || "") + "). اسمح للموقع بالكاميرا من إعدادات المتصفح، أو استخدم زرار «📸 صوّر الكود».");
+          });
+        });
+      });
+      function stopStream() { clearTimeout(timer); if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+      function stopScan() { stopStream(); scan.hidden = true; }
+      function tick() {
+        if (scan.hidden || !stream) return;
+        var v = $("scanVid"), c = $("scanCan");
+        if (v.readyState === v.HAVE_ENOUGH_DATA && v.videoWidth) {
+          c.width = v.videoWidth; c.height = v.videoHeight;
+          var x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(v, 0, 0);
+          var im = x.getImageData(0, 0, c.width, c.height), r = jsQR(im.data, im.width, im.height);
+          if (r && r.data) onCode(r.data);
+        }
+        timer = setTimeout(tick, 200);
+      }
+      scanFile.addEventListener("change", function () {
+        var f = scanFile.files && scanFile.files[0]; scanFile.value = "";
+        if (!f) return;
+        loadLib(function (ok) {
+          if (!ok) { smsg("❌ مكتبة قراءة الـ QR ما اتحمّلتش. اتأكد من النت."); return; }
+          var img = new Image(), url = URL.createObjectURL(f);
+          img.onload = function () {
+            var c = $("scanCan"), r = Math.min(1, 1000 / Math.max(img.width, img.height));
+            c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
+            var x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(img, 0, 0, c.width, c.height);
+            URL.revokeObjectURL(url);
+            var im = x.getImageData(0, 0, c.width, c.height), res = jsQR(im.data, im.width, im.height);
+            if (res && res.data) { last = ""; onCode(res.data); } else smsg("مقدرتش أقرا الكود من الصورة. قرّب وصوّر تاني.");
+          };
+          img.src = url;
+        });
+      });
+      function onCode(d) {
+        var now = Date.now(); if (d === last && now - lastT < 3000) return; last = d; lastT = now;
+        var p = d.split("|"), k = p[0] === "AFT" ? roster[p[2]] : null;
+        if (!k || !k.name) { smsg("❌ كود مش معروف"); return; }
+        if (has(k, sel)) smsg("ℹ️ " + k.name + " حضوره متسجل قبل كده");
+        else { mark(k, sel, true); smsg("✅ " + k.name + " حضر"); if (navigator.vibrate) navigator.vibrate(120); }
+      }
+
+      /* ===== إخوة الرب (الأدمن بس) ===== */
+      var ik = h("section", { class: "panel", id: "ikPanel", hidden: "" });
+      ik.innerHTML = '<h2>إخوة الرب (للأدمن فقط)</h2>' +
+        '<div class="addgrid"><input type="text" id="ikName" class="full" placeholder="الاسم" autocomplete="off">' +
+        '<select id="ikType" aria-label="شاب ولا شابة"><option value="شاب">شاب</option><option value="شابة">شابة</option></select>' +
+        '<input type="tel" id="ikPhone" placeholder="رقم التليفون" autocomplete="off">' +
+        '<input type="text" id="ikNote" class="full" placeholder="ملاحظة (اختياري)" autocomplete="off">' +
+        '<button class="btn primary" id="ikAdd" type="button">إضافة</button></div>' +
+        '<div class="muted" id="ikCount" style="margin:10px 0 6px"></div><div class="list" id="ikList"></div>';
+      $("tab-ik").appendChild(ik);
+      var ikData = [], unsub = null;
+      $("ikAdd").addEventListener("click", function () {
+        var n = $("ikName").value.trim(); if (!n) { $("ikName").focus(); return; }
+        A.db().collection("ikhwa").add({ name: n, type: $("ikType").value, phone: $("ikPhone").value.trim(), note: $("ikNote").value.trim(), added: A.todayStr() })
+          .catch(function () { A.flash("مقدرتش أضيف. راجع الـ Rules بتاعة ikhwa."); });
+        ["ikName", "ikPhone", "ikNote"].forEach(function (id) { $(id).value = ""; });
+      });
+      function renderIk() {
+        var box = $("ikList"); box.textContent = "";
+        $("ikCount").textContent = "العدد: " + ikData.length;
+        ikData.sort(function (a, b) { return a.name.localeCompare(b.name, "ar"); }).forEach(function (x) {
+          var row = h("div", { class: "row" }, h("div", { class: "who" },
+            h("strong", { text: (x.type === "شابة" ? "👩 " : "🧑 ") + x.name }),
+            h("span", { class: "muted", text: x.type + (x.note ? " — " + x.note : "") })));
+          if (x.phone) row.appendChild(h("a", { class: "btn", href: "tel:" + x.phone, text: "☎ اطلبه" }));
+          row.appendChild(h("button", {
+            class: "btn danger", type: "button", text: "حذف", onclick: function () {
+              if (confirm("حذف " + x.name + "؟")) A.db().collection("ikhwa").doc(x.id).delete();
+            }
+          }));
+          box.appendChild(row);
+        });
+      }
+
+      window.AFT_render = function () {
+        var role = A.state.role, admin = role === "all";
+        if (role && !rosterUnsub) startRoster();
+        if (!role && rosterUnsub) { rosterUnsub(); rosterUnsub = null; roster = {}; rosterReady = false; pending = {}; }
+        ik.hidden = !admin;
+        if (admin && !unsub) {
+          unsub = A.db().collection("ikhwa").onSnapshot(function (s) {
+            ikData = s.docs.map(function (d) { var v = d.data() || {}; return { id: d.id, name: String(v.name || ""), type: v.type === "شابة" ? "شابة" : "شاب", phone: String(v.phone || ""), note: String(v.note || "") }; });
+            renderIk();
+          }, function () { A.flash("مش قادر أقرأ إخوة الرب. أضف الـ Rule بتاعتها."); });
+        }
+        if (!admin && unsub) { unsub(); unsub = null; ikData = []; }
+        if (role) { syncRoster(); renderAtt(); }
+      };
+    })();
+  </script>
+
+  <!-- ===== نسب الحضور (زرار 📊 جوه لوحة حضور الجمعة) ===== -->
+  <script>
+    (function () {
+      var A = window.AFT; if (!A) return;
+      var h = A.h;
+      var FIRST = "2026-10-09"; /* أول جمعة (لازم تطابق START في السكريبت اللي فوق) */
+      function $(i) { return document.getElementById(i); }
+
+      /* ===== pure-start ===== */
+      function isFriday(d) { var t = new Date(d + "T00:00:00Z"); return !isNaN(t.getTime()) && t.getUTCDay() === 5; }
+      function computePercents(docs, today, addedById, first) {
+        var heldSet = {};
+        docs.forEach(function (k) {
+          k.att.forEach(function (d) { if (d >= first && d <= today && isFriday(d)) heldSet[d] = true; });
+        });
+        var held = Object.keys(heldSet).sort();
+        var rows = docs.filter(function (k) { return k.name; }).map(function (k) {
+          var mine = k.att.filter(function (d, i, a) { return heldSet[d] && a.indexOf(d) === i; }).sort();
+          var startFrom = held[0] || "";
+          var added = addedById[k.id] || "";
+          if (added) { startFrom = added; if (mine[0] && mine[0] < startFrom) startFrom = mine[0]; }
+          var possible = held.filter(function (d) { return d >= startFrom; }).length;
+          var total = Math.max(possible, mine.length);
+          return { id: k.id, name: k.name, gender: k.gender, grade: k.grade, got: mine.length, total: total, pct: total ? Math.round(100 * mine.length / total) : 0 };
+        });
+        return { held: held, rows: rows };
+      }
+      /* ===== pure-end ===== */
+
+      function short(d) { try { return new Date(d + "T00:00:00Z").toLocaleDateString("ar-EG-u-nu-latn", { day: "numeric", month: "long", timeZone: "UTC" }); } catch (e) { return d; } }
+
+      var pcUnsub = null;
+      var modal = h("div", { class: "modal", hidden: "" }, h("div", { class: "sheet", id: "pcSheet" }));
+      document.body.appendChild(modal);
+      function closePct() {
+        modal.hidden = true;
+        if (pcUnsub) { pcUnsub(); pcUnsub = null; }
+      }
+      modal.addEventListener("click", function (e) { if (e.target === modal) closePct(); });
+
+      var data = null;
+      function build() {
+        var s = $("pcSheet"); s.textContent = "";
+        s.appendChild(h("div", { class: "top" }, h("h2", { text: "📊 نسب الحضور" }), h("button", { class: "btn", type: "button", text: "إغلاق", onclick: closePct })));
+        s.appendChild(h("div", { class: "muted", id: "pcInfo", text: "بيحمّل..." }));
+        var bar = h("div", { class: "bar", style: "margin-top:8px" });
+        bar.appendChild(h("input", { type: "search", id: "pcQ", placeholder: "ابحث بالاسم", "aria-label": "بحث" }));
+        var g = h("select", { id: "pcG", "aria-label": "ولاد ولا بنات" }, h("option", { value: "all", text: "ولاد وبنات" }), h("option", { value: "boys", text: "ولاد" }), h("option", { value: "girls", text: "بنات" }));
+        var so = h("select", { id: "pcS", "aria-label": "الترتيب" }, h("option", { value: "low", text: "الأقل حضوراً أولاً" }), h("option", { value: "high", text: "الأعلى حضوراً أولاً" }), h("option", { value: "name", text: "بالاسم" }));
+        bar.appendChild(g); bar.appendChild(so);
+        s.appendChild(bar);
+        s.appendChild(h("div", { class: "list", id: "pcList" }));
+        ["pcQ", "pcG", "pcS"].forEach(function (id) { $(id).addEventListener(id === "pcQ" ? "input" : "change", draw); });
+      }
+      function draw() {
+        if (!data) return;
+        var box = $("pcList"), nq = A.norm($("pcQ").value), g = $("pcG").value, so = $("pcS").value;
+        box.textContent = "";
+        var rows = data.rows.filter(function (r) { return (g === "all" || r.gender === g) && (!nq || A.norm(r.name).indexOf(nq) > -1); });
+        rows.sort(function (a, b) {
+          if (so === "name") return a.name.localeCompare(b.name, "ar");
+          var d = so === "low" ? a.pct - b.pct : b.pct - a.pct;
+          return d || a.name.localeCompare(b.name, "ar");
+        });
+        var withData = rows.filter(function (r) { return r.total > 0; });
+        var avg = withData.length ? Math.round(withData.reduce(function (s, r) { return s + r.pct; }, 0) / withData.length) : 0;
+        $("pcInfo").textContent = data.held.length
+          ? "الجمعات اللي اتحسبت (" + data.held.length + "): " + data.held.map(short).join("، ") + " — متوسط الحضور: " + avg + "%"
+          : "لسه مفيش جمعة اتسجل فيها حضور.";
+        if (!rows.length) { box.appendChild(h("div", { class: "empty", text: "مفيش نتايج." })); return; }
+        rows.forEach(function (r) {
+          var col = r.pct >= 75 ? "var(--ok)" : r.pct >= 50 ? "var(--gold)" : "var(--danger)";
+          var meter = h("div", { style: "height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:4px" },
+            h("div", { style: "height:100%;width:" + r.pct + "%;background:" + col }));
+          box.appendChild(h("div", { class: "row" },
+            h("div", { class: "who" },
+              h("strong", { text: (r.gender === "girls" ? "👧 " : "👦 ") + r.name }),
+              h("span", { class: "muted", text: "سنة " + A.gradeLabel(r.grade) + " • حضر " + r.got + " من " + r.total }),
+              meter),
+            h("strong", { style: "color:" + col + ";font-size:1.3rem", text: r.pct + "%" })));
+        });
+      }
+
+      /* بيسمع للتغييرات مباشرة، فالنسب بتتحدّث أول بأول وهي مفتوحة */
+      function openPct() {
+        build(); modal.hidden = false;
+        if (pcUnsub) { pcUnsub(); pcUnsub = null; }
+        pcUnsub = A.db().collection("attendance").onSnapshot(function (snap) {
+          var added = {};
+          A.allKids().forEach(function (k) { if (k.added) added[k.id] = k.added; });
+          var docs = snap.docs.map(function (d) {
+            var v = d.data() || {};
+            return { id: d.id, name: String(v.name || ""), gender: v.gender === "girls" ? "girls" : "boys", grade: v.grade === 6 ? 6 : 5, att: Array.isArray(v.att) ? v.att.filter(function (x) { return typeof x === "string"; }) : [] };
+          });
+          data = computePercents(docs, A.todayStr(), added, FIRST);
+          draw();
+        }, function () { $("pcInfo").textContent = "مقدرتش أقرأ الحضور. اتأكد من الـ Rules بتاعة attendance."; });
+      }
+
+      var btn = h("button", { class: "btn", type: "button", id: "attPct", text: "📊 نسب الحضور" });
+      btn.addEventListener("click", openPct);
+      var bar0 = document.querySelector("#attPanel .bar");
+      if (bar0) bar0.appendChild(btn);
+    })();
+  </script>
+</body>
+
+</html>
