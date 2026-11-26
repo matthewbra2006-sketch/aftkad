@@ -1,12 +1,44 @@
 rules_version = '2';
 
-// Aftkad - افتقاد
-// All data (children's names, phones, addresses, attendance, visit log)
-// is private to the servants. No public access.
+// Aftkad - افتقاد (aftkad-5598f)
+// Role-based rules matching the three Firebase Auth accounts the app uses
+// (the EMAILS constant in index.html):
+//   boys@aftkad.com  -> boys' servants
+//   girls@aftkad.com -> girls' servants
+//   admin@aftkad.com -> sees everything
+// If those emails ever change in index.html, change them here too.
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
+
+    function signedIn() { return request.auth != null; }
+    function email()    { return request.auth.token.email; }
+    function isAdmin()  { return signedIn() && email() == 'admin@aftkad.com'; }
+    function isBoys()   { return signedIn() && email() == 'boys@aftkad.com'; }
+    function isGirls()  { return signedIn() && email() == 'girls@aftkad.com'; }
+
+    // Children's records: each group of servants only reaches its own kids.
+    match /boys/{id} {
+      allow read, write: if isBoys() || isAdmin();
+    }
+    match /girls/{id} {
+      allow read, write: if isGirls() || isAdmin();
+    }
+
+    // Friday attendance roster: every signed-in role reads the full roster
+    // (the app loads it whole for the stats view) and syncs its own kids.
+    match /attendance/{id} {
+      allow read, write: if signedIn();
+    }
+
+    // Who-visited-whom log: servants record visits, only the admin reads them.
+    match /visitlog/{id} {
+      allow read: if isAdmin();
+      allow write: if signedIn();
+    }
+
+    // Ekhwat el-Rab list: admin only (the app only shows this tab to admin).
+    match /ikhwa/{id} {
+      allow read, write: if isAdmin();
     }
   }
 }
