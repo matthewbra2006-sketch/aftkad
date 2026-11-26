@@ -26,14 +26,14 @@ A web app for a church children's ministry (5th and 6th grade) that helps servan
 1. Create a Firebase project and enable **Authentication** (Email/Password) and **Cloud Firestore**.
 2. In Authentication, create three users matching the emails in `index.html` (`boys@...`, `girls@...`, `admin@...`), each with its own password. You can change the emails in the `EMAILS` constant near the top of the script.
 3. Copy your own Firebase web config into the `FIREBASE_CONFIG` constant in `index.html`. (The config in the repo is not a secret; it only identifies the project. Access is controlled by Authentication and the Firestore rules below.)
-4. In the Firebase console, go to **Firestore Database → Rules**, paste the contents of `firestore.rules`, and publish. These rules require a signed-in user for every read and write, which is what keeps the children's data private.
+4. In the Firebase console, go to **Firestore Database → Rules**, paste the contents of `firestore.rules`, and publish. Access is role-based per servants account: boys' servants can access boys' records, girls' servants can access girls' records, and admin can access everything.
 5. Deploy with `firebase deploy` (the Firebase CLI) or host the files anywhere as a static site.
 
 ## Privacy
 
 The app stores personal data about real children (names, phone numbers, addresses, birthdays, confession father), so:
 
-- All Firestore access requires authentication. Never open the rules to the public.
+- Firestore access is role-based: boys' servants and girls' servants access their own group's records, while admin access is limited according to the rules. Never open the rules to the public.
 - No personal data is kept in this repository; everything lives in Firestore.
 - CSV backups contain personal data too, so treat the downloaded files as confidential.
 
